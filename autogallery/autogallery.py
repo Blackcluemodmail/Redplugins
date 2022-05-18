@@ -4,13 +4,13 @@ import aiohttp
 import io
 from io import BytesIO
 from discord.ext import commands
+from discord.ext.commands import has_permissions, MissingPermissions
 from typing import Any
 from datetime import datetime
 from core import checks
 from core.models import PermissionLevel
 import sys
 import re
-from discord.ext.commands import has_permissions, MissingPermissions
 
 class Autogallery(commands.Cog):
     async def red_delete_data_for_user(self, **kwargs):
@@ -22,9 +22,6 @@ class Autogallery(commands.Cog):
         
 
     @commands.command()
-    @commands.guild_only()
-    @checks.admin_or_permissions(manage_guild=True)
-    @checks.bot_has_permissions(manage_messages=True)
     async def addautogallery(
         self, ctx: commands.Context, channel: discord.TextChannel
     ):
@@ -37,9 +34,6 @@ class Autogallery(commands.Cog):
             await ctx.send(f"{channel.mention} is already in the Gallery channels list.")
 
     @commands.command()
-    @commands.guild_only()
-    @checks.admin_or_permissions(manage_guild=True)
-    @checks.bot_has_permissions(manage_messages=True)
     async def rmautogallery(
         self, ctx: commands.Context, channel: discord.TextChannel
     ):
@@ -52,9 +46,6 @@ class Autogallery(commands.Cog):
             await ctx.send(f"{channel.mention} already isn't in the Gallery channels list.")
     
     @commands.command()
-    @commands.guild_only()
-    @checks.admin_or_permissions(manage_guild=True)
-    @checks.bot_has_permissions(manage_messages=True)
     async def gallerychannel(self, ctx: commands.Context, channel: discord.TextChannel):
         """Add the gallery channel for auto posting images"""
         autochannel = await self.config.guild(ctx.guild).channel()
