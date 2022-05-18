@@ -7,14 +7,10 @@ from typing import Any
 from datetime import datetime
 from core import checks
 from core.models import PermissionLevel
+import sys
+import re
 
 class Autogallery(commands.Cog):
-    """
-    Auto post pictures into a gallery!
-    """
-
-    __author__ = "kennnyshiwa"
-
     async def red_delete_data_for_user(self, **kwargs):
         """ Nothing to delete """
         return
