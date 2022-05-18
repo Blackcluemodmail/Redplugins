@@ -5,14 +5,10 @@ import io
 from io import BytesIO
 from typing import Any
 from datetime import datetime
-from redbot.core import Config, checks, commands
+from core import checks
+from core.models import PermissionLevel
 
-from redbot.core.bot import Red
-
-Cog: Any = getattr(commands, "Cog", object)
-
-
-class Autogallery(Cog):
+class Autogallery(commands.Cog):
     """
     Auto post pictures into a gallery!
     """
@@ -23,18 +19,9 @@ class Autogallery(Cog):
         """ Nothing to delete """
         return
 
-    def __init__(self, bot: Red):
+    def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(
-            self, identifier=376564057517457408, force_registration=True
-        )
-        default_guild = {
-            "channel": None,
-            "channels": [],
-        }
         
-        self.config.register_guild(**default_guild)
-
 
     @commands.command()
     @commands.guild_only()
@@ -105,3 +92,7 @@ class Autogallery(Cog):
             embed.set_footer(text=message.channel)
             embed.set_image(url=attachment.url)
             await gallerychannel.send(embed=embed)
+
+
+def setup(bot):
+    bot.add_cog(Autogallery(bot))
