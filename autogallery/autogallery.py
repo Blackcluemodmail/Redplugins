@@ -10,6 +10,7 @@ from core import checks
 from core.models import PermissionLevel
 import sys
 import re
+from discord.ext.commands import has_permissions, MissingPermissions
 
 class Autogallery(commands.Cog):
     async def red_delete_data_for_user(self, **kwargs):
